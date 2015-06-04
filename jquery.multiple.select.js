@@ -294,6 +294,8 @@
         },
 
         close: function () {
+            // do not close the drop down if onBeforeClose returns false
+            if (!this.options.onBeforeClose()) return false;
             this.options.isOpen = false;
             this.$choice.find('>div').removeClass('open');
             this.$drop.hide();
@@ -564,6 +566,9 @@
 
         onOpen: function () {
             return false;
+        },
+        onBeforeClose: function () {
+            return true; //always true unless you don't want to close the dropdown
         },
         onClose: function () {
             return false;
